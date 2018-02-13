@@ -1,7 +1,13 @@
 import React, {Component} from 'react'
 import {findDOMNode} from 'react-dom'
+import './style.css'
 
 export default class AddNews extends Component {
+	state = {
+		agreeNotChecked: true,
+		authorIsEmpty: true,
+		textIsEmpty: true
+	}
 
 	componentDidMount () {
 		findDOMNode(this.refs.author).focus()
@@ -9,36 +15,66 @@ export default class AddNews extends Component {
 
 	render() {
 		return (
-			<form className='add cf'>
+			<form className='addnews cf'>
 				<input
 					type="text"
-					className="add__author"
+					className="addnews__author"
+					onChange={this.onFieldChange.bind(this, 'authorIsEmpty')}
 					defaultValue=''
 					placeholder='Ваше имя'
 					ref='author'
 				/>
 				<textarea
-					className='add_text'
+					className='addnews_text'
+					onChange={this.onFieldChange.bind(this, 'textIsEmpty')}
 					defaultValue=''
 					placeholder='Текст новости'
 					ref='text'
 				/>
-				<label className='add__checkrule'>
-					<input type="checkbox" defaultChecked={false} ref='checkrule'/>Я согласен с правилами
+				<label className='addnews__checkrule'>
+					<input type="checkbox"
+						   defaultChecked={false}
+						   ref='checkrule'
+						   onChange={this.changeBtn}
+					/>Я согласен с правилами
 				</label>
 				<button
-					className='add__btn'
-					onClick={this.publish}
-					ref='alert_button'>
-					Запостить!
+					className='addnews__btn'
+					onClick={this.onBtnClickHandler}
+					ref='alert_button'
+					disabled={this.state.agreeNotChecked || this.state.authorIsEmpty || this.state.textIsEmpty}
+				>Запостить!
 				</button>
 			</form>
 		)
 	}
 
-	publish = () => {
-		console.log(this.refs)
-		alert(findDOMNode(this.refs.author).value + ': ' +  findDOMNode(this.refs.text).value)
+	changeBtn = () => this.setState({
+		agreeNotChecked: !this.state.agreeNotChecked
+	})
+
+	onBtnClickHandler = (e) => {
+		e.preventDefault()
+		let author = findDOMNode(this.refs.author).value
+		let text = findDOMNode(this.refs.text).value
+		let item = [{
+			author: author,
+			text: text,
+			bigText: '...'
+		}]
+
+		window.ee.emit('News.add', item)
 	}
 
+	onFieldChange = (fieldName, e) => {
+		if(e.target.value.trim().length > 0) {
+			this.setState({
+				[''+fieldName]: false
+			})
+		} else {
+			this.setState({
+				[''+fieldName]: true
+			})
+		}
+	}
 }

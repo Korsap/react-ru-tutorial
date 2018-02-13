@@ -19,13 +19,13 @@ class Article extends Component {
 
 		return (
 			<div className='article'>
-				<p className='news__author'>{newsElement.author}:</p>
-				<p className='news__text'>{newsElement.text}</p>
+				<p className='article__author'>{newsElement.author}:</p>
+				<p className='article__text'>{newsElement.text}</p>
 				<a href="#"
 				   onClick={this.showMore}
-				   className={'news__readmore ' + (this.state.visible ? 'none' : '')}>
+				   className={'article__readmore ' + (this.state.visible ? 'none' : '')}>
 					Подробнее</a>
-				<p className={'news__big-text ' + (this.state.visible ? '' : 'none')}>{newsElement.bigText}</p>
+				<p className={'article__big-text ' + (this.state.visible ? '' : 'none')}>{newsElement.bigText}</p>
 			</div>
 		)
 	}

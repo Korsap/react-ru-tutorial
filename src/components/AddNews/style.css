@@ -1,0 +1,27 @@
+.addnews {
+	margin: 0 5px 5px 0;
+	width: 210px;
+	border: 1px dashed rgba(0, 89, 181, 0.82);
+	padding: 5px;
+}
+.addnews__author, .addnews__text, .addnews__btn, .addnews__checkrule {
+	display: block;
+	margin: 0 0 5px 0;
+	padding: 5px;
+	width: 94%;
+	border: 1px solid rgba(0, 89, 181, 0.82);
+}
+.addnews__checkrule {
+	border: none;
+	font-size: 12px;
+}
+.addnews__btn {
+	box-sizing: content-box;
+	color: #FFF;
+	text-transform: uppercase;
+	background: #007DDC;
+}
+.addnews__btn:disabled {
+	background: #CCC;
+	color: #999;
+}

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Article from '../Article'
+import './style.css'
 
 class News extends Component {
 
@@ -19,7 +20,7 @@ class News extends Component {
 		return (
 			<div className='news'>
 				{newsTemplate}
-				<strong className={'news__count ' + (newsList.length > 0 ? '' : 'none')}>Всего новостей: {newsList.length}
+				<strong className={'newslist__count ' + (newsList.length > 0 ? '' : 'none')}>Всего новостей: {newsList.length}
 				</strong>
 			</div>
 		)
