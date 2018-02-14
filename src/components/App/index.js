@@ -14,10 +14,9 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		let self = this
 		window.ee.addListener('News.add', (item) => {
-			let nextNews = item.concat(self.state.news)
-			self.setState({
+			let nextNews = item.concat(this.state.news)
+			this.setState({
 				news: nextNews
 			})
 		})
