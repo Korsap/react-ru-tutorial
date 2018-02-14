@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
+import newsList from '../../fixtures'
 import NewsList from '../NewsList'
 import Comments from '../Comments'
 import AddNews from '../AddNews'
-import newsList from '../../fixtures'
-import EventEmitter from 'browser-event-emitter'
 import './style.css'
 
+let EventEmitter = require('events').EventEmitter
 window.ee = new EventEmitter()
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
 		})
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		window.ee.removeListener('News.add')
 	}
 
@@ -32,7 +32,7 @@ class App extends Component {
 			<div className='app'>
 				<AddNews />
 				<h3>Новости</h3>
-				<NewsList newsList={newsList}/>
+				<NewsList newsList={this.state.news}/>
 				<Comments />
 			</div>
 		)

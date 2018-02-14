@@ -56,7 +56,8 @@ export default class AddNews extends Component {
 	onBtnClickHandler = (e) => {
 		e.preventDefault()
 		let author = findDOMNode(this.refs.author).value
-		let text = findDOMNode(this.refs.text).value
+		let textEl = findDOMNode(this.refs.text)
+		let text = textEl.value
 		let item = [{
 			author: author,
 			text: text,
@@ -64,6 +65,8 @@ export default class AddNews extends Component {
 		}]
 
 		window.ee.emit('News.add', item)
+		textEl.value = ''
+		this.setState({textIsEmpty: true})
 	}
 
 	onFieldChange = (fieldName, e) => {
